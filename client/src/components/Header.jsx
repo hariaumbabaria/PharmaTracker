@@ -4,24 +4,29 @@ import {Link} from 'react-router-dom'
 
 const Header = () => {
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar style={{height: 50, background: 'black', marginTop: 15}} sticky="top">
             <Link to='/' className="mx-auto">
                 <Navbar.Brand>
                     <GiMedicines className="mb-2" style={{color: '#5cb85c'}}/>
-                    Pharma<span style={{color:'#5cb85c', fontWeight: 600}}>Tracker</span>
-                </Navbar.Brand>
+                    <span style={{color:'#ffffff', fontWeight: 600}}>Pharma</span>
+                    <span style={{color:'#5cb85c', fontWeight: 600}}>Tracker</span>
+                    </Navbar.Brand>
             </Link>
             <Nav className="ml-auto mx-auto">
-                <Nav.Item  className="mr-4">
-                    <Button variant="outline-success">
-                        AdminSignup
-                    </Button>
-                </Nav.Item>
-                <Nav.Item style = {{color: 'white'}}>
-                    <Button variant="success">
-                        AdminLogin
-                    </Button>
-                </Nav.Item>
+                <Link to='/Signup'>
+                    <Nav.Item  className="mr-4">
+                        <Button variant="outline-success">
+                            AdminSignup
+                        </Button>
+                    </Nav.Item>
+                </Link>
+                <Link to='/Login'>
+                    <Nav.Item style = {{color: 'white'}}>
+                        <Button variant="success">
+                            AdminLogin
+                        </Button>
+                    </Nav.Item>
+                </Link>
             </Nav>
         </Navbar>
     )

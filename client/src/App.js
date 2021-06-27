@@ -5,6 +5,8 @@ import {} from 'react-bootstrap'
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Search from './components/Search';
+import Signup from "./components/Signup";
+import Login from './components/Login';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Header/>
       <Switch>
         <Route exact path='/' component={Search} />
+        <Route exact path='/Signup' component={Signup} />
+        <Route exact path='/Login' component={Login} />
       </Switch>
     </BrowserRouter>
   )
