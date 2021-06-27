@@ -12,7 +12,7 @@ const district = [
 const Search = () => {
     return (
             <div style={{ display: 'block', 
-                width: '45%',
+                width: '35%',
                 margin: '100px auto',
                 borderRadius: '5px',
                 background: 'rgba(255,255,255, 0.15)',

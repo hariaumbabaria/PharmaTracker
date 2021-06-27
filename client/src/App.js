@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Search from './components/Search';
 import Signup from "./components/Signup";
 import Login from './components/Login';
+import Update from "./components/Update";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/' component={Search} />
         <Route exact path='/Signup' component={Signup} />
         <Route exact path='/Login' component={Login} />
+        <Route exact path='/Update' component={Update} />
       </Switch>
     </BrowserRouter>
   )
