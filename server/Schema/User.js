@@ -30,26 +30,26 @@ const user = new mongoose.Schema( {
         unique: true,
         lowercase: true
     },
-    ShopName:{
+    shopname:{
         type:String,
         required:true,
         trim:true,
     },
-    ShopAddress:{
+    shopaddress:{
         type:String,
         required:true
     },
-    District:{
+    district:{
         type:String,
         required:true
     },
-    PinCode:{
+    pincode:{
         type:String,
         required:true
     },
-    Features:{
+    features:{
         type:String
-    },
+    }
 });
 
 
