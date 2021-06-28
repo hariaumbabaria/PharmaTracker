@@ -84,7 +84,7 @@ const Signup = () => {
                     </Form.Label>
                     <Form.Control type="text" placeholder="Enter Features"/>
                 </Form.Group>
-                <Button size="lg" variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
+                <Button size="lg" variant="success" type="submit" style={{marginLeft: '45%', marginTop: 20}}>
                     SignUp
                 </Button>
             </Form>

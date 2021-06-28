@@ -1,4 +1,4 @@
-import { Form, Container, Row, Col, Button } from 'react-bootstrap';
+import { Form, Col, Button } from 'react-bootstrap';
 
 
 const Update = () => {
