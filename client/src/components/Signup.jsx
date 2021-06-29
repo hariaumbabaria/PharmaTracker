@@ -1,8 +1,31 @@
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import { FiLogIn } from 'react-icons/fi'
+import {authenticateSignup} from '../service/service';
+import {useState} from 'react';
+
+const signupInitialValues = {
+    fullname: '',
+    username: '',
+    password: '',
+    phone: '',
+    email: '',
+    shopname: '',
+    shopaddress: '',
+    district: '',
+    pincode: '',
+    features: ''
+};
 
 
 const Signup = () => {
+
+    const [signup, setSignup] = useState(signupInitialValues);
+
+    const onInputChange = (e) => {
+        setSignup({ ...signup, [e.target.name]: e.target.value });
+        console.log(signup);
+    }
+
     return (
         <div style={{ display: 'block', 
             width: '70%',
@@ -84,7 +107,7 @@ const Signup = () => {
                     </Form.Label>
                     <Form.Control type="text" placeholder="Enter Features"/>
                 </Form.Group>
-                <Button size="lg" variant="success" type="submit" style={{marginLeft: '45%', marginTop: 20}}>
+                <Button size="lg" variant="success" style={{marginLeft: '45%', marginTop: 20}}>
                     SignUp
                 </Button>
             </Form>

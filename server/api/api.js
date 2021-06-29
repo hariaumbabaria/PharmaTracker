@@ -29,7 +29,16 @@ router.post('/login', async (req, res, next) => {
 })
 
 router.post('/medicine/update', async (req,res,next) => {
-    
+    const exist = await Medicine.findOne({username: req.body.username, name: req.body.name})
+    console.log(exist);
+    if(exist){
+        await Medicine.updateOne({"_id":exist._id},{$set:{quantity:req.body.quantity}});
+        console.log("Data updated Successfully");
+    }else{
+        Medicine.create(req.body)
+        .then(data => res.json(data))
+        .catch(err => console.log(err))
+    }
 })
 
 router.post('/medicine/delete', async (req,res,next) => {
