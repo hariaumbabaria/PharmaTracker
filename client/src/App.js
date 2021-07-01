@@ -9,19 +9,22 @@ import Signup from "./components/Signup";
 import Login from './components/Login';
 import Update from "./components/Update";
 import Upload from './components/Upload';
+import LoginState from './controller/loginstate'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header/>
-      <Switch>
-        <Route exact path='/' component={Search} />
-        <Route exact path='/Signup' component={Signup} />
-        <Route exact path='/Login' component={Login} />
-        <Route exact path='/Update' component={Update} />
-        <Route exact path='/Upload' component={Upload} />
-      </Switch>
-    </BrowserRouter>
+    <LoginState>
+      <BrowserRouter>
+        <Header/>
+        <Switch>
+          <Route exact path='/' component={Search} />
+          <Route exact path='/Signup' component={Signup} />
+          <Route exact path='/Login' component={Login} />
+          <Route exact path='/Update' component={Update} />
+          <Route exact path='/Upload' component={Upload} />
+        </Switch>
+      </BrowserRouter>
+    </LoginState>
   )
 }
 

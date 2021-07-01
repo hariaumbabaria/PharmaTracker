@@ -4,7 +4,7 @@ const url = 'http://localhost:5000/api';
 
 export const authenticateSignup = async (user) => {
     try{
-        return await axios.post(`${url}/signup`, user)
+        return await axios.post(`${url}/signin`, user)
     }
     catch(error) {
         console.log('Error while calling signup api', error);

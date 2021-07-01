@@ -34,12 +34,12 @@ const Login = () => {
 
     return (
         <div style={{ display: 'block', 
-            width: '30%',
-            margin: '100px auto',
-            borderRadius: '5px',
-            background: 'rgba(255,255,255, 0.15)',
-            padding: 30,
-         }}>
+        width: '30%',
+        margin: '100px auto',
+        borderRadius: '5px',
+        background: 'rgba(255,255,255, 0.15)',
+        padding: 30,
+        }}>
             <h4 style={{color: '#ffffff', display:'flex', justifyContent: "center", alignItems: "center", marginBottom: 15}}>
                 <FiLogIn style={{color: '#ffffff', fontSize: 20}} className="mr-2"/>
                 Login

@@ -2,6 +2,7 @@ import {Navbar, Nav, Button, Container} from 'react-bootstrap';
 import {GiMedicines} from 'react-icons/gi';
 import {Link} from 'react-router-dom'
 
+
 const Header = () => {
     return (
         <Navbar style={{height: 50, background: 'black', marginTop: 15}} sticky="top">
