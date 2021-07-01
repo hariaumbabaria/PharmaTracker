@@ -1,7 +1,10 @@
-import { Form, Container, Row, Col, Button } from 'react-bootstrap';
+import { Form, Col, Button } from 'react-bootstrap';
 import { FiLogIn } from 'react-icons/fi'
 import { authenticateLogin } from '../service/service.js';
-import { useState } from 'react';
+import { useState , useContext} from 'react';
+import { LoginContext } from '../controller/loginstate.jsx';
+import {url} from '../constants/constants'
+import {useHistory} from 'react-router-dom'
 
 
 const loginInitialValues = {
@@ -14,21 +17,25 @@ const Login = () => {
 
     const [login, setLogin] = useState(loginInitialValues);
 
+    const {account, setAccount} = useContext(LoginContext);
+
     const onValueChange = (e) => {
         setLogin({ ...login, [e.target.name]: e.target.value });
     }
     
+    const history = useHistory();
+
     const clickHandler = async () => {
-        // alert(login);
         let response = await authenticateLogin(login);
-        // alert(response);
         if(!response) {
             alert("invalid login");
             setLogin({ ...login, password: ''});
-            return;
+            return;  
         }
-        alert("login successfully");
+        // alert("login successfully");
+        setAccount(login.username);
         setLogin(loginInitialValues);
+        history.push('/Update');
     }
     
 
