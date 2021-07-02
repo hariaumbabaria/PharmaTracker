@@ -1,4 +1,4 @@
-import {Navbar, Nav, Button, Container} from 'react-bootstrap';
+import {Navbar, Nav, Button, Container, Dropdown} from 'react-bootstrap';
 import { useContext } from 'react';
 import {GiMedicines} from 'react-icons/gi';
 import {FaRegHandPeace} from 'react-icons/fa'
@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 const Header = () => {
 
     const { account,setAccount } = useContext(LoginContext);
-
+    
     const history = useHistory();
 
     const clickHandler = () => {
@@ -49,9 +49,6 @@ const Header = () => {
                 :
                 // login pelanu default
                 <Nav className="ml-auto mx-auto">
-                    <Button variant = "outline-success" style={{marginRight: '150px'}}>
-                        <FaRegHandPeace /><FaRegHandPeace />  {account}!!
-                    </Button>
                     <Link to='/Upload'>
                         <Nav.Item  className="mr-4">
                             <Button variant="outline-success">
@@ -66,13 +63,16 @@ const Header = () => {
                             </Button>
                         </Nav.Item>
                     </Link>
-                    <Link to='/Login'>
-                        <Nav.Item style = {{color: 'white'}}>
-                            <Button variant="success" onClick={clickHandler}>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            {account}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={clickHandler}>
                                 Logout
-                            </Button>
-                        </Nav.Item>
-                    </Link>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Nav> 
             }
         </Navbar>

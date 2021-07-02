@@ -1,7 +1,57 @@
 import { Form, Col, Button } from 'react-bootstrap';
-
+import { LoginContext } from '../controller/loginstate';
+import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { medicineDelete } from '../service/service';
+import { medicineAdder } from '../service/service';
+import { useState } from 'react';
 
 const Update = () => {
+
+
+    const {account,setAccount} = useContext(LoginContext);
+
+    const medicineinitial = {
+        name: '',
+        quantity: '',
+        username: account
+    };
+
+    const medicinedelinitial = {
+        name: '',
+        username: account
+    }
+
+    const [ medicineInfo,setMedicineInfo ] = useState(medicineinitial);
+
+    const [ medDel, setMedDel ] = useState(medicinedelinitial);
+
+    const history = useHistory();
+
+
+    if(account === '') 
+    {
+        alert("please login to upload");
+        history.push('/login');
+    }
+    
+
+    const changeHandlerUpdate = (e) => {
+        setMedicineInfo({...medicineInfo, [e.target.name]: e.target.value});
+    }
+
+    const changeHandlerDelete = (e) => {
+        setMedDel({...medDel, [e.target.name]: e.target.value});
+    }
+
+    const clickHandlerUpdate = () => {
+        console.log(medicineInfo);
+        medicineAdder(medicineInfo);
+    }
+    const clickHandlerDelete = () => {
+        medicineDelete(medDel);
+    }
+
     return (
         <div style = {{display: 'flex', alignItems: 'center'}}>
             <div style={{ display: 'block', 
@@ -19,15 +69,15 @@ const Update = () => {
                         <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                             <span>Medicine Name</span>
                         </Form.Label>
-                        <Form.Control type="text" placeholder="Enter Medicine Name"/>
+                        <Form.Control onChange={changeHandlerUpdate} value={medicineInfo.name} name = 'name' type="text" placeholder="Enter Medicine Name"/>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                             <span>Quantity</span>
                         </Form.Label>
-                        <Form.Control type="text" placeholder="Enter Quantity"/>
+                        <Form.Control onChange={changeHandlerUpdate} value={medicineInfo.quantity} name="quantity" type="text" placeholder="Enter Quantity"/>
                     </Form.Group>
-                    <Button size="lg" variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
+                    <Button onClick={() => clickHandlerUpdate()} size="lg" variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
                         Update
                     </Button>
                 </Form>
@@ -48,9 +98,9 @@ const Update = () => {
                         <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                             <span>Medicine Name</span>
                         </Form.Label>
-                        <Form.Control type="text" placeholder="Enter Medicine Name"/>
+                        <Form.Control onChange={changeHandlerDelete} value={medDel.name} name = 'name' type="text" placeholder="Enter Medicine Name"/>
                     </Form.Group>
-                    <Button size="lg" variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
+                    <Button size="lg" onClick={clickHandlerDelete} variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
                         Delete
                     </Button>
                 </Form>
