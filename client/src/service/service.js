@@ -37,3 +37,22 @@ export const medicineDelete = async(medicine) => {
         console.log('Error while calling medicine delete api', error);
     }
 }
+
+export const medicinefinder = async (medicine) => {
+    console.log(medicine);
+    try {
+        return await axios.get(`${url}/medicine/search`, medicine);
+    }
+    catch(error) {
+        console.log('Error while finding medicine',error);
+    }
+}
+
+export const userfind = async (user) => {
+    try{
+        return await axios.get(`${url}/user/search`, user)
+    }
+    catch(error) {
+        console.log('Error while calling user for shop address', error);
+    }
+}
