@@ -57,7 +57,32 @@ router.post('/medicine/add', async (req,res,err) => {
         Medicine.create(req.body)
         .then(data => res.json(data))
         .catch(err => console.log(err))
+    } 
+})
+
+router.get('/medicine/search', async (req,res,err) => {
+    const exist = await Medicine.find({name:req.body.name});
+    if(exist){
+        return res.json(exist);
+    }
+    else{
+        return res.json('medicine not found');
     }
 })
+
+router.get('/user/search', async(req,res,err) => {
+    const exist = await User.find({username:req.body.username})
+    if(exist)
+    {
+        return res.json(exist);
+    }
+    else 
+    {
+        return res.json(null);
+    }
+})
+
+
+
 
 export default router;

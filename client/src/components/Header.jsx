@@ -1,6 +1,7 @@
 import {Navbar, Nav, Button, Container, Dropdown} from 'react-bootstrap';
 import { useContext } from 'react';
 import {GiMedicines} from 'react-icons/gi';
+import {IoMdPower} from 'react-icons/io';
 import {FaRegHandPeace} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import { LoginContext } from '../controller/loginstate';
@@ -69,6 +70,7 @@ const Header = () => {
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             <Dropdown.Item onClick={clickHandler}>
+                                <IoMdPower style={{marginRight: 10}}/>
                                 Logout
                             </Dropdown.Item>
                         </Dropdown.Menu>
