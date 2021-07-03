@@ -2,6 +2,10 @@ import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs'
 import { useState } from 'react';
 import Output from './Output';
+import { medicinefinder } from '../service/service';
+import axios from 'axios';
+
+const url = 'http://localhost:5000/api';
 
 const district = [
 'Ahmedabad','Amreli','Anand','Aravalli','Banaskantha (Palanpur)','Bharuch','Bhavnagar','Botad','Chhota Udepur','Dahod',
@@ -15,10 +19,40 @@ const Search = () => {
         name: '',
         district: ''
     }
+
     
     const [medicinename, setMedicinename] = useState(medicinenameinitial);
 
     const [ clickdone, setClickdone ] = useState(false);
+
+    const [ userdata,setUserdata ] = useState([]);
+
+   
+    const [medicinedata, setMedicinedata] = useState([]);
+
+    const medicinefinder = async(medicine) => {
+        try {
+            axios.get(`${url}/medicine/search`, {'params': {name: medicine.name}})
+                 .then((response) => {
+                     setMedicinedata(response.data);
+                 })
+        }
+        catch(error) {
+            console.log('Error while finding medicine',error);
+        }
+    }
+
+    const userFinder = (medicine) => {
+        try {
+            console.log(medicine.username)
+            axios.get(`${url}/user/search`,{'params':{name:medicine.username}})
+            .then ((res) => {
+                setUserdata(res.data);
+            })
+        }catch(err) {
+            console.log('Error while finding User',err);
+        }
+    }
     
     const onValueChange = (e) => {
         setMedicinename({...medicinename, [e.target.name]: e.target.value });
@@ -26,13 +60,16 @@ const Search = () => {
 
     const clickhandler = () => {
         setClickdone(true)
+        medicinefinder(medicinename)
+        userFinder(medicinedata)
+        console.log(userdata);
     }
 
     return (
         <>
             {
                 clickdone ? 
-                <Output medicine={medicinename}/>
+                <Output medicine={medicinedata} user={userdata}/>
                 :
                 <div style={{ display: 'block', 
                 width: '35%',

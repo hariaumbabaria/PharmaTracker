@@ -18,6 +18,7 @@ router.post('/signin', async (req,res,next) => {
 
 router.post('/login', async (req, res, next) => {
     const user = await User.findOne({username: req.body.username, password: req.body.password});
+    console.log(req.body.username);
     if(user)
     {
         return res.status(200).json(`${req.body.username} login successfull`);
@@ -61,7 +62,8 @@ router.post('/medicine/add', async (req,res,err) => {
 })
 
 router.get('/medicine/search', async (req,res,err) => {
-    const exist = await Medicine.find({name:req.body.name});
+    const exist = await Medicine.find(req.query);
+    console.log(exist);
     if(exist){
         return res.json(exist);
     }
@@ -70,8 +72,8 @@ router.get('/medicine/search', async (req,res,err) => {
     }
 })
 
-router.get('/user/search', async(req,res,err) => {
-    const exist = await User.find({username:req.body.username})
+router.get('/user/search:username', async(req,res,err) => {
+    const exist = await User.find({username:req.params.username})
     if(exist)
     {
         return res.json(exist);

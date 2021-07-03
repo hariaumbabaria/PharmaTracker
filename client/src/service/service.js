@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useState } from 'react';
 
 const url = 'http://localhost:5000/api';
 
@@ -31,22 +32,14 @@ export const medicineAdder = async(medicine) => {
 
 export const medicineDelete = async(medicine) => {
     try {
-        return await axios.post(`${url}/medicine/delete`, medicine);
+        await axios.post(`${url}/medicine/delete`, medicine);
     }
     catch(error) {
         console.log('Error while calling medicine delete api', error);
     }
 }
 
-export const medicinefinder = async (medicine) => {
-    console.log(medicine);
-    try {
-        return await axios.get(`${url}/medicine/search`, medicine);
-    }
-    catch(error) {
-        console.log('Error while finding medicine',error);
-    }
-}
+
 
 export const userfind = async (user) => {
     try{
