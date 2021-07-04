@@ -1,6 +1,4 @@
 import { Form, Col, Row, Button, Card, CardGroup } from 'react-bootstrap';
-import { LoginContext } from '../controller/loginstate';
-import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { medicinefinder, userfind } from '../service/service';
@@ -8,11 +6,41 @@ import axios from 'axios';
 
 const url = 'http://localhost:5000/api';
 
+var vis=0;
+
 const Output = (props) => {
     
     const medicinedata = props.medicine;
-    console.log(typeof medicindata);
+    console.log(medicinedata);
 
+    const [ userdata,setUserdata ] = useState([]);
+
+    const userFinder = (medicine) => {
+        try {
+            console.log(medicine.username)
+            axios.get(`${url}/user/search`,{'params':{username: medicine.username}})
+            .then ((res) => {
+                console.log(res.data);
+                setUserdata([...userdata,res.data]);
+            })
+        }catch(err) {
+            console.log('Error while finding User',err);
+        }
+    }
+
+    const userdone = () => {
+        if(vis>0){
+            return;
+        }
+        vis=1;
+        for(var i = 0; i < medicinedata.length; i++)
+        {
+            userFinder(medicinedata[i]);
+        }
+    }
+
+    userdone();
+    console.log(userdata);
     return (
         <Row xs={1} md={2} className="g-4" style={{margin: '3% 3%'}}>
             {

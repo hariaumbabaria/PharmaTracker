@@ -72,15 +72,15 @@ router.get('/medicine/search', async (req,res,err) => {
     }
 })
 
-router.get('/user/search:username', async(req,res,err) => {
-    const exist = await User.find({username:req.params.username})
+router.get('/user/search', async(req,res,err) => {
+    const exist = await User.find(req.query)
     if(exist)
     {
         return res.json(exist);
     }
     else 
     {
-        return res.json(null);
+        return res.json('user not found');
     }
 })
 

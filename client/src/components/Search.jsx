@@ -7,8 +7,7 @@ import axios from 'axios';
 
 const url = 'http://localhost:5000/api';
 
-const district = [
-'Ahmedabad','Amreli','Anand','Aravalli','Banaskantha (Palanpur)','Bharuch','Bhavnagar','Botad','Chhota Udepur','Dahod',
+const district = ['Select', 'Ahmedabad','Amreli','Anand','Aravalli','Banaskantha (Palanpur)','Bharuch','Bhavnagar','Botad','Chhota Udepur','Dahod',
 'Dangs (Ahwa)','Devbhoomi Dwarka','Gandhinagar','Gir Somnath','Jamnagar','Junagadh','Kachchh','Kheda (Nadiad)','Mahisagar',
 'Mehsana','Morbi','Narmada (Rajpipla)','Navsari','Panchmahal','Patan','Porbandar','Rajkot','Sabarkantha','Surat',
 'Surendranagar','Tapi','Vadodara','Valsad']
@@ -20,21 +19,19 @@ const Search = () => {
         district: ''
     }
 
-    
     const [medicinename, setMedicinename] = useState(medicinenameinitial);
 
     const [ clickdone, setClickdone ] = useState(false);
 
-    const [ userdata,setUserdata ] = useState([]);
-
-   
+    
+    
     const [medicinedata, setMedicinedata] = useState([]);
 
     const medicinefinder = async(medicine) => {
         try {
-            axios.get(`${url}/medicine/search`, {'params': {name: medicine.name}})
+            await axios.get(`${url}/medicine/search`, {'params': {name: medicine.name}})
                  .then((response) => {
-                     setMedicinedata(response.data);
+                    setMedicinedata(response.data);
                  })
         }
         catch(error) {
@@ -42,17 +39,7 @@ const Search = () => {
         }
     }
 
-    const userFinder = (medicine) => {
-        try {
-            console.log(medicine.username)
-            axios.get(`${url}/user/search`,{'params':{name:medicine.username}})
-            .then ((res) => {
-                setUserdata(res.data);
-            })
-        }catch(err) {
-            console.log('Error while finding User',err);
-        }
-    }
+    
     
     const onValueChange = (e) => {
         setMedicinename({...medicinename, [e.target.name]: e.target.value });
@@ -61,15 +48,13 @@ const Search = () => {
     const clickhandler = () => {
         setClickdone(true)
         medicinefinder(medicinename)
-        userFinder(medicinedata)
-        console.log(userdata);
     }
 
     return (
         <>
             {
                 clickdone ? 
-                <Output medicine={medicinedata} user={userdata}/>
+                <Output medicine={medicinedata}/>
                 :
                 <div style={{ display: 'block', 
                 width: '35%',
