@@ -26,7 +26,8 @@ const Output = (props) => {
             console.log('Error while finding User',err);
         }
     }
-    
+    var i =0;
+    var [ I,seI ] = useState(0);
     useEffect(() => {
         setUserdata([])
         for(var i = 0; i < medicinedata.length; i++)
@@ -35,11 +36,23 @@ const Output = (props) => {
         }
     }, [medicinedata])
 
-    return (
-        
-        <div>
-            {
+    const updateI = () => {
+        i = 2;
+        seI(i);
+    };
 
+    console.log(i);
+
+    if(i!=2){
+        setInterval(updateI,1000);
+    }
+
+    return (
+        <div>
+        {
+            I?
+            <div>
+            {
                 userdata.length=== 0 ?
                 // <Child  />
                 <div className="d-flex justify-content-center">
@@ -74,7 +87,11 @@ const Output = (props) => {
                     }
                 </Row>
             }
-        </div> 
+        </div>
+        :
+        <p color='white'>{i}</p> 
+        }
+        </div>
     )
 }
 
