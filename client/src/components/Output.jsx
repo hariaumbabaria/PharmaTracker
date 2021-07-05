@@ -87,9 +87,9 @@ const Output = (props) => {
                     }
                 </Row>
             }
-        </div>
-        :
-        <p color='white'>{i}</p> 
+            </div>
+            :
+            <div/>
         }
         </div>
     )
