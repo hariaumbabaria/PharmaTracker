@@ -16,7 +16,6 @@ const loginInitialValues = {
 const Login = () => {
 
     const [login, setLogin] = useState(loginInitialValues);
-    console.log(login);
 
     const {account, setAccount} = useContext(LoginContext);
 

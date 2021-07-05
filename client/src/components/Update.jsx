@@ -1,10 +1,11 @@
-import { Form, Col, Button } from 'react-bootstrap';
+import { Form, Col, Button, Card } from 'react-bootstrap';
 import { LoginContext } from '../controller/loginstate';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { medicineDelete } from '../service/service';
 import { medicineAdder } from '../service/service';
 import { useState } from 'react';
+import Alert from './Alert'
 
 const Update = () => {
 
@@ -24,6 +25,10 @@ const Update = () => {
 
     const [ medicineInfo,setMedicineInfo ] = useState(medicineinitial);
 
+    const [errorupdate, setErrorupdate] = useState(null);
+
+    const [errordelete, setErrordelete] = useState(null);
+
     const [ medDel, setMedDel ] = useState(medicinedelinitial);
 
     const history = useHistory();
@@ -37,25 +42,30 @@ const Update = () => {
     
 
     const changeHandlerUpdate = (e) => {
+        setErrorupdate(null);
         setMedicineInfo({...medicineInfo, [e.target.name]: e.target.value});
     }
 
     const changeHandlerDelete = (e) => {
+        setErrordelete(null);
         setMedDel({...medDel, [e.target.name]: e.target.value});
     }
 
-    const clickHandlerUpdate = () => {
-        console.log(medicineInfo);
+    const clickHandlerUpdate = (e) => {
+        e.preventDefault();
         medicineAdder(medicineInfo);
+        setErrorupdate('success');
     }
-    const clickHandlerDelete = () => {
+    const clickHandlerDelete = (e) => {
+        e.preventDefault();
         medicineDelete(medDel);
+        setErrordelete('success');
     }
 
     return (
         <div style = {{display: 'flex', alignItems: 'center'}}>
-            <div style={{ display: 'block', 
-            width: '30%',
+            <Card style={{ display: 'block', 
+            width: '30rem',
             margin: '100px auto',
             borderRadius: '5px',
             background: 'rgba(255,255,255, 0.15)',
@@ -77,14 +87,17 @@ const Update = () => {
                         </Form.Label>
                         <Form.Control onChange={changeHandlerUpdate} value={medicineInfo.quantity} name="quantity" type="text" placeholder="Enter Quantity"/>
                     </Form.Group>
-                    <Button onClick={() => clickHandlerUpdate()} size="lg" variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
+                    <Button onClick={(e) => clickHandlerUpdate(e)} size="lg" variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
                         Update
                     </Button>
                 </Form>
-            </div>
-            <div style={{ display: 'block', 
-            width: '30%',
-            height: '30%',
+                {
+                    (errorupdate != null) ? 
+                    <Alert msg={errorupdate} /> : <div />
+                }
+            </Card>
+            <Card style={{ display: 'block', 
+            width: '30rem',
             margin: '100px auto',
             borderRadius: '5px',
             background: 'rgba(255,255,255, 0.15)',
@@ -104,7 +117,11 @@ const Update = () => {
                         Delete
                     </Button>
                 </Form>
-            </div>
+                {
+                    (errordelete != null) ? 
+                    <Alert msg={errordelete} /> : <div />
+                }
+            </Card>
         </div>
     )
 }

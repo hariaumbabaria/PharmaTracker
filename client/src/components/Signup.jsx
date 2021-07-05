@@ -1,9 +1,14 @@
-import { Form, Container, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { FiLogIn } from 'react-icons/fi'
 import {authenticateSignup} from '../service/service';
 import {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
+
+const district = ['Select', 'Ahmedabad','Amreli','Anand','Aravalli','Banaskantha (Palanpur)','Bharuch','Bhavnagar','Botad','Chhota Udepur','Dahod',
+'Dangs (Ahwa)','Devbhoomi Dwarka','Gandhinagar','Gir Somnath','Jamnagar','Junagadh','Kachchh','Kheda (Nadiad)','Mahisagar',
+'Mehsana','Morbi','Narmada (Rajpipla)','Navsari','Panchmahal','Patan','Porbandar','Rajkot','Sabarkantha','Surat',
+'Surendranagar','Tapi','Vadodara','Valsad']
 
 const signupInitialValues = {
     fullname: '',
@@ -25,7 +30,6 @@ const Signup = () => {
 
     const onInputChange = (e) => {
         setSignup({ ...signup, [e.target.name]: e.target.value });
-        console.log(signup);
     }
 
     const history = useHistory();
@@ -106,11 +110,17 @@ const Signup = () => {
                     <Form.Control onChange={(e) => onInputChange(e)} value={signup.shopaddress} name="shopaddress" type="text" placeholder="Enter Shop Address"/>
                 </Form.Group>
                 <Row>
-                <Form.Group as={Col}>
+                <Form.Group as={Col} controlId="exampleForm.ControlSelect1">
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                         <span>District</span>
                     </Form.Label>
-                    <Form.Control onChange={(e) => onInputChange(e)} value={signup.district} name="district" type="text" placeholder="Enter District"/>
+                    <Form.Control onChange={(e) => onInputChange(e)} value={signup.district} name="district" as="select" placeholder="Enter District">
+                    {
+                        district.map((dis) => (
+                            <option>{dis}</option>
+                        ))
+                    }
+                    </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col}>
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>

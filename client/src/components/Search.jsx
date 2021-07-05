@@ -1,4 +1,4 @@
-import { Form, Container, Row, Col, Button } from 'react-bootstrap';
+import { Form, Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs'
 import { useState } from 'react';
 import Output from './Output';
@@ -54,15 +54,15 @@ const Search = () => {
         <>
             {
                 clickdone ? 
-                <Output medicine={medicinedata}/>
+                <Output medicine={medicinedata} district={medicinename.district}/>
                 :
-                <div style={{ display: 'block', 
+                <Card style={{ display: 'flex', 
                 width: '35%',
                 margin: '100px auto',
                 borderRadius: '5px',
                 background: 'rgba(255,255,255, 0.15)',
-                padding: 30 }}>
-                    <h4 style={{color: '#ffffff', marginLeft: '30%', marginBottom: 30}}>
+                padding: 30 }} className="mx-auto">
+                    <h4 className="mx-auto mb-4" style={{color: '#ffffff'}}>
                         <BsSearch style={{color: '#ffffff', fontSize: 20}} className="mr-2"/>
                         Search Medicines
                     </h4>
@@ -73,7 +73,7 @@ const Search = () => {
                         </Form.Label>
                         <Form.Control type="text" onChange={(e) => onValueChange(e)} value={medicinename.name} name="name" placeholder="Enter Medicine Name"/>
                         </Form.Group>
-                        <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Group controlId="exampleForm.ControlSelect1" className="mb-4">
                             <Form.Label style={{fontSize: 20, color: '#ffffff'}}>Select District Name</Form.Label>
                             <Form.Control onChange={(e) => onValueChange(e)} value={medicinename.district} name="district" as="select">
                             {
@@ -83,11 +83,11 @@ const Search = () => {
                             }
                             </Form.Control>
                         </Form.Group>
-                        <Button onClick={clickhandler} size="lg" variant="success" type="submit" style={{marginLeft: '40%', marginTop: 20}}>
-                            Submit
+                        <Button onClick={clickhandler} size="lg" variant="success" className="d-flex mx-auto">
+                            Search
                         </Button>
                     </Form>
-                </div>
+                </Card>
             }
         </>
     )
