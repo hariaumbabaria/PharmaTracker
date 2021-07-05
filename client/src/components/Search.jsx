@@ -49,12 +49,19 @@ const Search = () => {
         setClickdone(true)
         medicinefinder(medicinename)
     }
+    const clicksearchHandler = () => {
+        setClickdone(false);
+        setMedicinedata([]);
+    }
 
     return (
         <>
             {
                 clickdone ? 
-                <Output medicine={medicinedata} district={medicinename.district}/>
+                <div>
+                    <Output medicine={medicinedata} district={medicinename.district}/>
+                    <Button variant="success" onClick={clicksearchHandler} className="d-flex mx-auto">Back to Search</Button>
+                </div>
                 :
                 <Card style={{ display: 'flex', 
                 width: '35%',
