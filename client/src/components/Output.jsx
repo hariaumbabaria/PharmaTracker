@@ -43,8 +43,6 @@ const Output = (props) => {
         seI(i);
     };
 
-    console.log(medicinequantity);
-
     if(i!=2){
         setInterval(updateI,1000);
     }
