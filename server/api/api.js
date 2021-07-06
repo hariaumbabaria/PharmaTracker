@@ -18,7 +18,6 @@ router.post('/signin', async (req,res,next) => {
 
 router.post('/login', async (req, res, next) => {
     const user = await User.findOne({username: req.body.username, password: req.body.password});
-    console.log(req.body.username);
     if(user)
     {
         return res.status(200).json(`${req.body.username} login successfull`);
@@ -31,7 +30,6 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/medicine/update', async (req,res,next) => {
     const exist = await Medicine.findOne({username: req.body.username, name: req.body.name})
-    console.log(exist);
     if(exist){
         await Medicine.updateOne({"_id":exist._id},{$set:{quantity:req.body.quantity}});
         console.log("Data updated Successfully");
@@ -50,7 +48,6 @@ router.post('/medicine/delete', async (req,res,next) => {
 
 router.post('/medicine/add', async (req,res,err) => {
     const exist = await Medicine.findOne({username: req.body.username, name: req.body.name})
-    console.log(exist);
     if(exist){
         await Medicine.updateOne({"_id":exist._id},{$set:{quantity:req.body.quantity}});
         console.log("Data updated Successfully");
@@ -63,7 +60,6 @@ router.post('/medicine/add', async (req,res,err) => {
 
 router.get('/medicine/search', async (req,res,err) => {
     const exist = await Medicine.find(req.query);
-    console.log(exist);
     if(exist){
         return res.json(exist);
     }
