@@ -3,10 +3,10 @@ import {BsUpload} from 'react-icons/bs';
 import { useContext} from 'react';
 import { useState } from 'react';
 import { CSVReader } from 'react-papaparse';
-import { LoginContext } from './controller/loginstate';
-import { medicineAdder } from './service/service';
+import { LoginContext } from '../controller/loginstate';
+import { medicineAdder } from '../service/service';
 import { useHistory } from 'react-router-dom';
-import Alert from './components/Alert';
+import Alert from './Alert';
 
 const Upload = () => {
     const  [files,setFiles] = useState(null);

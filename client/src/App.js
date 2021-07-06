@@ -8,7 +8,7 @@ import Search from './components/Search';
 import Signup from "./components/Signup";
 import Login from './components/Login';
 import Update from "./components/Update";
-import Upload from './Upload';
+import Upload from "./components/Upload";
 import LoginState from './controller/loginstate'
 
 function App() {
