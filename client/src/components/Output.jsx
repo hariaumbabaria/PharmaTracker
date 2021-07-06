@@ -1,4 +1,4 @@
-import { Col, Row, Card } from 'react-bootstrap';
+import { Col, Row, Card, Spinner } from 'react-bootstrap';
 import { useEffect, useState} from 'react';
 import {FaClinicMedical} from 'react-icons/fa';
 import axios from 'axios';
@@ -12,6 +12,7 @@ const Output = (props) => {
     const district = props.district;
     
     var [ userdata,setUserdata ] = useState([]);
+    var [ medicinequantity, setMedicinequantity] = useState([]);
 
     const userFinder = async (medicine) => {
         try {
@@ -20,13 +21,14 @@ const Output = (props) => {
                 if(district === res.data[0].district)
                 {
                    setUserdata(userdata => ([...userdata, res.data]));
+                   setMedicinequantity(medicinequantity => ([...medicinequantity, medicine.quantity]));
                 }
             })
         }catch(err) {
             console.log('Error while finding User',err);
         }
     }
-    var i =0;
+    var i = 0;
     var [ I,seI ] = useState(0);
     useEffect(() => {
         setUserdata([])
@@ -41,7 +43,7 @@ const Output = (props) => {
         seI(i);
     };
 
-    console.log(i);
+    console.log(medicinequantity);
 
     if(i!=2){
         setInterval(updateI,1000);
@@ -61,12 +63,17 @@ const Output = (props) => {
                 :
                 <Row xs={1} md={2} className="g-4" style={{margin: '3% 3%'}}>
                     {
-                        userdata.map(user => (
+                        userdata.map((user, index) => (
                             <Col className = "mb-3">
                                 <Card border="success" style = {{backgroundColor: 'rgba(255,255,255, 0.15)', color: '#ffffff', borderWidth: '2px'}}>
                                     <Card.Body> 
                                         <Card.Title style={{textTransform: 'uppercase'}}><FaClinicMedical className="mb-2"/> {user[0].shopname}</Card.Title>
                                         <Card.Text>
+                                            <span style={{color:'#5cb85c'}}>
+                                                <span style={{textTransform: 'uppercase'}}>{medicinedata[0].name} </span> 
+                                                Quantity: 
+                                            </span> {medicinequantity[index]}
+                                            <br/>
                                             <span style={{color:'#5cb85c'}}>Owner Name: </span>{user[0].fullname}
                                             <br/>
                                             <span style={{color:'#5cb85c'}}>Shop Address: </span>{user[0].shopaddress}
@@ -89,7 +96,10 @@ const Output = (props) => {
             }
             </div>
             :
-            <div/>
+            <div style={{color: '#fff'}} className="d-flex justify-content-center mb-4">
+                <Spinner animation="border" variant="success" className="mr-3"/>
+                Loading
+            </div>
         }
         </div>
     )
