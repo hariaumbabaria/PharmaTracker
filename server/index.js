@@ -18,7 +18,7 @@ app.use(cors());
 app.use('/api',router);
 
 
-const URL = `mongodb+srv://${username}:${password}@cluster0.vg7by.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const URL = `mongodb+srv://${username}:${password}@pharmacy.wrmps.mongodb.net/Pharmacy?retryWrites=true&w=majority`;
 
 db(URL);
 
