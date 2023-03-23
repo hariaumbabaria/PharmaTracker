@@ -4,7 +4,7 @@ import {FaClinicMedical} from 'react-icons/fa';
 import axios from 'axios';
 import Alert from './Alert';
 
-const url = 'http://localhost:5000/api';
+const url = 'https://pharmatracker-backend.onrender.com/api';
 
 const Output = (props) => {
     
