@@ -1,4 +1,4 @@
-<p style="font-weight: 600">Hosted URL of this repository: https://pharmatracker01.herokuapp.com/</p>
+<p style="font-weight: 600">Hosted URL of this repository: https://pharmatracker-frontend.onrender.com/</p>
 <p style="font-weight: 600">What is PharmaTracker ?</p>
 <p>PharmaTracker is a medicine stock tracking website.
 When user search for a medicine, the website will show the medicine quantity, shop address, email address, phone number, etc.  if available in their district.
