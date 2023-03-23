@@ -18,17 +18,39 @@ const user = new mongoose.Schema( {
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        min:8,
+        validate: {
+            validator: function(v) {
+                return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v);
+            },
+            message: "Please enter a valid password"
+        },
+        required: [true, "Password required"]
     },
     phone: {
-        type: String
+        type: String,
+        validate: {
+            validator: function(v) {
+                return /[0-9]{10}/.test(v);
+            },
+            message: "Please enter a valid phone"
+        },
+        required: [true, "Phone required"]
     },
     email: {
         type: String,
         required: true,
         trim: true,
         unique: true,
-        lowercase: true
+        lowercase: true,
+        validate: {
+            validator: function(v) {
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+            },
+            message: "Please enter a valid email"
+        },
+        required: [true, "Email required"]
     },
     shopname:{
         type:String,
@@ -48,7 +70,8 @@ const user = new mongoose.Schema( {
         required:true
     },
     features:{
-        type:String
+        type:String,
+        required:true
     }
 });
 

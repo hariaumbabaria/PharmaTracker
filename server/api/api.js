@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import User from '../schema/User.js';
 import Medicine from '../schema/Medicine.js';
 
@@ -67,6 +67,18 @@ router.get('/medicine/search', async (req,res,err) => {
         return res.json('medicine not found');
     }
 })
+
+router.get('/medicine', async (req,res,err) => {
+    try {
+        const medicine = await Medicine.find({});
+        return res.json(medicine);
+    }
+    catch(error)
+    {
+        console.log('Error: ', error.message);
+    }
+})
+
 
 router.get('/user/search', async(req,res,err) => {
     const exist = await User.find(req.query)

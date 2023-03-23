@@ -1,4 +1,4 @@
-import { Form, Col, Button, Card } from 'react-bootstrap';
+import { Form, Col, Button, Card, Row } from 'react-bootstrap';
 import { LoginContext } from '../controller/loginstate';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
@@ -63,7 +63,7 @@ const Update = () => {
     }
 
     return (
-        <div style = {{display: 'flex', alignItems: 'center'}}>
+        <Row noGutters={true} style = {{display: 'flex', alignItems: 'center'}}>
             <Card style={{ display: 'block', 
             width: '30rem',
             margin: '100px auto',
@@ -122,7 +122,7 @@ const Update = () => {
                     <Alert msg={"Medicine Deleted Successfully"} color={'success'}/> : <div />
                 }
             </Card>
-        </div>
+        </Row>
     )
 }
 

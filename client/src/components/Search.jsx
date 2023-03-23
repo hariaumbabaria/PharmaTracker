@@ -1,9 +1,10 @@
-import { Form, Container, Row, Col, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Output from './Output';
-import { medicinefinder } from '../service/service';
 import axios from 'axios';
+import { Typeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 const url = 'http://localhost:5000/api';
 
@@ -22,10 +23,13 @@ const Search = () => {
     const [medicinename, setMedicinename] = useState(medicinenameinitial);
 
     const [ clickdone, setClickdone ] = useState(false);
-
-    
     
     const [medicinedata, setMedicinedata] = useState([]);
+
+    const [medicinesearch, setMedicineSearch] = useState([]);
+
+    const [select, setSelect] = useState([]);
+
 
     const medicinefinder = async(medicine) => {
         try {
@@ -39,8 +43,17 @@ const Search = () => {
         }
     }
 
-    
-    
+    useEffect(() => {
+        const loadMedicine = async () => {
+            const response = await axios.get(`${url}/medicine`);
+            setMedicineSearch(response.data);
+        }
+        loadMedicine()
+    }, [])
+
+    const medicinesearchUnique = [...new Map(medicinesearch.map(item =>
+        [item['name'], item])).values()];
+
     const onValueChange = (e) => {
         setMedicinename({...medicinename, [e.target.name]: e.target.value });
     }
@@ -49,6 +62,7 @@ const Search = () => {
         setClickdone(true)
         medicinefinder(medicinename)
     }
+
     const clicksearchHandler = () => {
         setClickdone(false);
         setMedicinedata([]);
@@ -64,7 +78,7 @@ const Search = () => {
                 </div>
                 :
                 <Card style={{ display: 'flex', 
-                width: '35%',
+                width: '30rem',
                 margin: '100px auto',
                 borderRadius: '5px',
                 background: 'rgba(255,255,255, 0.15)',
@@ -74,11 +88,21 @@ const Search = () => {
                         Search Medicines
                     </h4>
                     <Form>
-                    <Form.Group>
-                        <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
-                            <span>Enter Medicine Name</span>
-                        </Form.Label>
-                        <Form.Control type="text" onChange={(e) => onValueChange(e)} value={medicinename.name} name="name" placeholder="Enter Medicine Name"/>
+                        <Form.Group>
+                            <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
+                                <span>Enter Medicine Name</span>
+                            </Form.Label>
+
+                            <Typeahead
+                                selected={select}
+                                onChange={(select) => {setMedicinename({...medicinename, name: select}); setSelect()}}
+                                id="typeahead"
+                                options={medicinesearchUnique.map(med => (                                      
+                                    med.name
+                                ))}
+                                placeholder="Enter Medicine Name"
+                            />
+                            
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlSelect1" className="mb-4">
                             <Form.Label style={{fontSize: 20, color: '#ffffff'}}>Select District Name</Form.Label>

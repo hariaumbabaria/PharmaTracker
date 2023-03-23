@@ -44,7 +44,7 @@ const Output = (props) => {
     };
 
     if(i!=2){
-        setInterval(updateI,1000);
+        setInterval(updateI,2000);
     }
 
     return (

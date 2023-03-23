@@ -39,7 +39,7 @@ const Signup = () => {
         let response = await authenticateSignup(signup);
         // alert(response);
         if(!response) {
-            alert("invalid signup");
+            // alert("invalid signup");
             setSignup({ ...signup, password: ''});
             return;
         }
@@ -60,56 +60,56 @@ const Signup = () => {
                 <FiLogIn style={{color: '#ffffff', fontSize: 30}} className="mr-2"/>
                 SignUp
             </h4>
-            <Form>
-                <Row>
+            <Form onSubmit={e => {e.preventDefault(); }} >
+                <Row xs={1} md={2} style={{justifyContent: "center", alignItems: "center"}}>
                     <Form.Group as={Col}>
                         <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                             <span>Full Name</span>
                         </Form.Label>
-                        <Form.Control onChange={(e) => onInputChange(e)} value={signup.fullname} name="fullname" type="text" placeholder="Enter Full Name"/>
+                        <Form.Control required onChange={(e) => onInputChange(e)} value={signup.fullname} name="fullname" type="text" placeholder="Enter Full Name"/>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                             <span>User Name</span>
                         </Form.Label>
-                        <Form.Control onChange={(e) => onInputChange(e)} value={signup.username} name="username" type="text" placeholder="Enter User Name"/>
+                        <Form.Control required onChange={(e) => onInputChange(e)} value={signup.username} name="username" type="text" placeholder="Enter User Name"/>
                     </Form.Group>
                 </Row>
-                <Row>
+                <Row xs={1} md={2} style={{justifyContent: "center", alignItems: "center"}}>
                     <Form.Group as={Col}>
                         <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                             <span>Password</span>
                         </Form.Label> 
-                        <Form.Control onChange={(e) => onInputChange(e)} value={signup.password} name="password" type="password" placeholder="Enter Password"/>
+                        <Form.Control required onChange={(e) => onInputChange(e)} value={signup.password} name="password" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" placeholder="Enter Pass (Min 8 char, at least one letter and one number)"/>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                             <span>Phone Number</span>
                         </Form.Label>
-                        <Form.Control onChange={(e) => onInputChange(e)} value={signup.phone} name="phone" type="text" placeholder="Enter Phone Number"/>
+                        <Form.Control required onChange={(e) => onInputChange(e)} value={signup.phone} name="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter Phone Number"/>
                     </Form.Group>
                 </Row>
-                <Row>
+                <Row xs={1} md={2} style={{justifyContent: "center", alignItems: "center"}}>
                 <Form.Group as={Col}>
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                         <span>Email</span>
                     </Form.Label>
-                    <Form.Control onChange={(e) => onInputChange(e)} value={signup.email} name="email" type="text" placeholder="Enter Email Address"/>
+                    <Form.Control required onChange={(e) => onInputChange(e)} value={signup.email} name="email" type="email" placeholder="Enter Email Address"/>
                 </Form.Group>
                 <Form.Group as={Col}>
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                         <span>Shop Name</span>
                     </Form.Label>
-                    <Form.Control onChange={(e) => onInputChange(e)} value={signup.shopname} name="shopname" type="text" placeholder="Enter Shop Name"/>
+                    <Form.Control required onChange={(e) => onInputChange(e)} value={signup.shopname} name="shopname" type="text" placeholder="Enter Shop Name"/>
                 </Form.Group>
                 </Row>
                 <Form.Group>
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                         <span>Shop Address</span>
                     </Form.Label>
-                    <Form.Control onChange={(e) => onInputChange(e)} value={signup.shopaddress} name="shopaddress" type="text" placeholder="Enter Shop Address"/>
+                    <Form.Control required onChange={(e) => onInputChange(e)} value={signup.shopaddress} name="shopaddress" type="text" placeholder="Enter Shop Address"/>
                 </Form.Group>
-                <Row>
+                <Row xs={1} md={2} style={{justifyContent: "center", alignItems: "center"}}>
                 <Form.Group as={Col} controlId="exampleForm.ControlSelect1">
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                         <span>District</span>
@@ -126,18 +126,20 @@ const Signup = () => {
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                         <span>Pin Code</span>
                     </Form.Label>
-                    <Form.Control onChange={(e) => onInputChange(e)} value={signup.pincode} name="pincode" type="text" placeholder="Enter Pin Code"/>
+                    <Form.Control required onChange={(e) => onInputChange(e)} value={signup.pincode} name="pincode" type="text" placeholder="Enter Pin Code"/>
                 </Form.Group>
                 </Row>
                 <Form.Group>
                     <Form.Label style={{fontSize: 20, color: '#ffffff'}}>
                         <span>Features</span>
                     </Form.Label>
-                    <Form.Control onChange={(e) => onInputChange(e)} value={signup.features} name="features" type="text" placeholder="Enter Features"/>
+                    <Form.Control required onChange={(e) => onInputChange(e)} value={signup.features} name="features" type="text" placeholder="Enter Features"/>
                 </Form.Group>
-                <Button size="lg" variant="success" onClick={() => clickHandler()} style={{marginLeft: '45%', marginTop: 20}}>
-                    SignUp
-                </Button>
+                <Row style={{justifyContent: "center", alignItems: "center"}}>
+                    <Button type="submit" size="lg" variant="success" onClick={() => clickHandler()} style={{ marginTop: 20}}>
+                        SignUp
+                    </Button>
+                </Row>
             </Form>
         </div>
     ) 
