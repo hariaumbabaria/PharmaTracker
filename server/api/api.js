@@ -1,6 +1,6 @@
 import express, { response } from 'express';
-import User from '../schema/User.js';
-import Medicine from '../schema/Medicine.js';
+import User from '../Schema/User.js';
+import Medicine from '../Schema/Medicine.js';
 
 const router=express.Router();
 
